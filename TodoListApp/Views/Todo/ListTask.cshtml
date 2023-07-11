@@ -1,0 +1,80 @@
+﻿@using TodoListApp.ViewModels.Seedwork;
+@using TodoListApp.ViewModels;
+
+
+@model PagedList<Todo>
+@{
+	var filter = ViewBag.Filter;
+
+}
+<p>
+	<a class="btn btn-primary" asp-action="Create">Create task</a> 
+</p>
+<partial class="row" name="_Filter" model="@filter" />
+
+
+
+<table class="table">
+	<thead>
+		<th>Title</th>
+		<th>CreateAt</th>
+		<th>TimeToDo</th>
+		<th>Status</th>
+	</thead>
+	<tbody>
+		@foreach (var item in Model.Items)
+		{			
+			<tr>
+				<td>@item.Title</td>
+				<td>@item.CreatedDate</td>
+				<td>@item.TimeToDo</td>
+				<td>@item.Status</td>
+				
+				<td><a asp-action="Detail" asp-route-id="@item.Id">Detail</a></td>
+				<td><a asp-action="Delete" asp-route-id="@item.Id">Delete</a></td>
+			</tr>
+		}
+	</tbody>
+</table>
+<div class="container">
+	@if (Model.TotalPages > 0)
+	{
+		<ul class="pagination justify-content-end">
+			@if (Model.CurrentPage > 1)
+			{
+				<li class="page-item">
+					<a class="page-link" asp-action="ListTask" asp-route-pg="1"
+					   asp-route-FilterOrder="@filter.FilterOrder" asp-route-Status="@filter.Status">First</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" asp-action="ListTask" asp-route-pg="@(Model.CurrentPage-1)"
+					   asp-route-FilterOrder="@filter.FilterOrder" asp-route-Status="@filter.Status">Previous</a>
+				</li>
+			}
+			@for (var pge = Model.StartPage; pge <= Model.EndPage; pge++)
+			{
+				<li class="page-item" @(pge == Model.CurrentPage ? "active" : "")>
+					<a class="page-link" asp-action="ListTask" asp-route-pg="@pge"
+					   asp-route-FilterOrder="@filter.FilterOrder" asp-route-Status="@filter.Status">@pge</a>
+				</li>
+			}
+			@if (Model.CurrentPage < Model.TotalPages)
+			{
+				<li class="page-item">
+					<a class="page-link" asp-action="ListTask" asp-route-pg="@(Model.CurrentPage+1)"
+					asp-route-FilterOrder="@filter.FilterOrder" asp-route-Status="@filter.Status">Next</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" asp-action="ListTask" asp-route-pg="Model.TotalPages"
+					   asp-route-FilterOrder="@filter.FilterOrder" asp-route-Status="@filter.Status">Last</a>
+				</li>
+			}
+		</ul>
+	}
+</div>
+<h3>Looxi vl</h3>
+
+
+
+
+

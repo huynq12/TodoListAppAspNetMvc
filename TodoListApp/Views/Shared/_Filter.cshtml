@@ -1,0 +1,25 @@
+﻿@using TodoListApp.Enums;
+@using TodoListApp.ViewModels;
+@model TaskListSearch
+@{
+	
+}
+
+<form asp-action="ListTask">
+	<div class="col">
+		<span>Title</span>
+		<input type="text" asp-for="StringSearch" />
+	</div>
+
+	<div class="col">
+		@Html.DropDownList("Status",Html.GetEnumSelectList<Status>(),"--Status--")
+	</div>
+
+	<div class="col">
+		@Html.DropDownList("FilterOrder",Html.GetEnumSelectList<FilterOrder>(),"--Filt--")
+
+
+	</div>
+		<button type="submit">Search</button>
+	</div>
+</form>

@@ -1,0 +1,32 @@
+﻿@model Todo
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input type="text" asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input type="text" asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="TimeToDo" class="control-label"></label>
+                <input asp-for="TimeToDo" type="datetime-local" class="form-control" />
+                <span asp-validation-for="TimeToDo" class="text-danger"></span>
+            </div>
+           
+        </div>
+      
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-outline-success float-right" />
+        <a class="btn btn-outline-secondary" asp-action="ListTask">Show all</a>
+    </div>
+
+</form>
